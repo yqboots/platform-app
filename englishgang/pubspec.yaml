@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   fluwx: ^0.6.3
   json_annotation: ^2.0.0
+  dio: ^2.1.0
 
   models:
     path: ../models/
