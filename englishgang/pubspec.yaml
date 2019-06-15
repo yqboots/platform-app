@@ -20,6 +20,10 @@ dependencies:
   flutter:
     sdk: flutter
   fluwx: ^0.6.3
+  json_annotation: ^2.0.0
+
+  models:
+    path: ../models/
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -28,6 +32,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  build_runner: ^1.0.0
+  json_serializable: ^2.0.0
 
 
 # For information on the generic Dart part of this file, see the
