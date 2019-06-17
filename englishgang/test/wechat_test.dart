@@ -38,6 +38,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String code = "";
+
   @override
   void initState() {
     super.initState();
@@ -52,7 +54,25 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  void _openLoginPage() {}
+  void _requestAuth() async {
+    fluwx.responseFromAuth.listen((data) {
+      if (data.errCode == 0) {
+        this._getAccessToken(data.code).then((response) {
+          print(response.toString());
+        });
+      }
+    });
+
+    fluwx.sendAuth(scope: "snsapi_userinfo", state: "123").then((data) {
+      print(data.toString());
+    });
+  }
+
+  Future<Response> _getAccessToken(String code) async {
+    Dio dio = new Dio();
+
+    return dio.get("http://192.168.31.201:8080/wechat/auth/$code");
+  }
 
   void _openWeChatAndPay() async {
     Dio dio = new Dio();
@@ -101,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                     child: RaisedButton(
                       child: const Text('微信登录'),
-                      onPressed: _openLoginPage,
+                      onPressed: _requestAuth,
                     ),
                   ),
                 ],
