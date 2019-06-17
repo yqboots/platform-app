@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:models/social/wechat/payment.dart';
 
 void main() => runApp(MyApp());
 
@@ -56,18 +57,21 @@ class _MyHomePageState extends State<MyHomePage> {
   void _openWeChatAndPay() async {
     Dio dio = new Dio();
 
-    Response response = await dio.get("http://192.168.31.201:8080/wechat/pay/initiate/123/APP");
-    print(response.data.toString());
+    Response response = await dio.get("http://192.168.31.201:8080/wechat/pay/initiate/D00000002/APP");
+    // print(response.data.toString());
 
-    /*fluwx.pay(
-      appId: 'wxe477169329e9e2ae',
-      partnerId: '1536184451',
-      nonceStr: '9fhj7ye41fycg7i9vbaddc0z9r43qb74',
-      sign: 'C93B66D159023907D406C843EDD2A37A',
-      prepayId: 'wx130045194745681add0a93881956491000',
-      packageValue: 'Sign=WXPay',
-      timeStamp: 1560360455,
-    );*/
+    InitiatePaymentRequest request = InitiatePaymentRequest.fromJson(response.data);
+    // print(request);
+
+    fluwx.pay(
+      appId: request.appId,
+      partnerId: request.partnerId,
+      nonceStr: request.nonceStr,
+      sign: request.sign,
+      prepayId: request.prepayId,
+      packageValue: request.packageValue,
+      timeStamp: request.timeStamp,
+    );
   }
 
   void _share() {}

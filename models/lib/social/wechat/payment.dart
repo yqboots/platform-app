@@ -16,7 +16,7 @@ class InitiatePaymentRequest {
   @JsonKey(name: 'noncestr')
   String nonceStr;
   @JsonKey(name: 'timestamp')
-  String timeStamp;
+  int timeStamp;
   String sign;
 
   InitiatePaymentRequest({
