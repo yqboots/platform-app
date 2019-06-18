@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
-import 'package:models/social/wechat/payment.dart';
+import 'package:models/models.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,6 +45,15 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     fluwx.register(appId: "wxe477169329e9e2ae");
+
+    fluwx.responseFromAuth.listen((data) {
+      if (data.errCode == WECHAT_AUTH_ERR_OK) {
+        this._getAccessToken(data.code).then((response) {
+          OpenIdResponse openIdResponse = OpenIdResponse.fromJson(response.data);
+          print(openIdResponse.toString());
+        });
+      }
+    });
   }
 
   @override
@@ -55,15 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _requestAuth() async {
-    fluwx.responseFromAuth.listen((data) {
-      if (data.errCode == 0) {
-        this._getAccessToken(data.code).then((response) {
-          print(response.toString());
-        });
-      }
-    });
-
-    fluwx.sendAuth(scope: "snsapi_userinfo", state: "123").then((data) {
+    fluwx.sendAuth(scope: "snsapi_userinfo", state: "1234").then((data) {
       print(data.toString());
     });
   }
