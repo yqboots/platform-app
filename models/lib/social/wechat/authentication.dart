@@ -38,3 +38,4 @@ class OpenIdResponse {
 const WECHAT_AUTH_ERR_OK = 0;
 const WECHAT_AUTH_ERR_AUTH_DENIED = -4;
 const WECHAT_AUTH_ERR_USER_CANCEL = -2;
+const WECHAT_AUTH_SCOPE_USERINFO = 'snsapi_userinfo';

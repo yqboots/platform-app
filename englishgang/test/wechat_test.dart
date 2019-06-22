@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _requestAuth() async {
-    fluwx.sendAuth(scope: "snsapi_userinfo", state: "1234").then((data) {
+    fluwx.sendAuth(scope: WECHAT_AUTH_SCOPE_USERINFO, state: "1234").then((data) {
       print(data.toString());
     });
   }
