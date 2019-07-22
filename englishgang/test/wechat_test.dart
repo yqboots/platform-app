@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     fluwx.responseFromAuth.listen((data) {
       if (data.errCode == WECHAT_AUTH_ERR_OK) {
         this._getAccessToken(data.code).then((response) {
+          // TODO: change to GetUserInfoResponse
           OpenIdResponse openIdResponse = OpenIdResponse.fromJson(response.data);
           print(openIdResponse.toString());
         });
